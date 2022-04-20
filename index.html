@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>index.knit</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="  Shannon Pileggi" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <meta name="description" content="Project structure"/>
+    <meta name="github-repo" content="djnavarro/slides"/>
+    <meta name="twitter:title" content="Project structure"/>
+    <meta name="twitter:description" content="Project structure"/>
+    <meta name="twitter:url" content="https://slides.djnavarro.net/project-structure/"/>
+    <meta name="twitter:image" content="https://slides.djnavarro.net/project-structure/img/twitter-image.png"/>
+    <meta name="twitter:image:alt" content=""/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:creator" content="@djnavarro"/>
+    <meta name="twitter:site" content="@djnavarro"/>
+    <meta property="og:title" content="Project structure"/>
+    <meta property="og:description" content="Project structure"/>
+    <meta property="og:url" content="https://slides.djnavarro.net/project-structure/"/>
+    <meta property="og:image" content="https://slides.djnavarro.net/project-structure/img/twitter-image.png"/>
+    <meta property="og:image:alt" content=""/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="Danielle Navarro"/>
+    <link rel="stylesheet" href="style/xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="style/slides-style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# <blockquote>
+<p>   🏗 <br>&gt;    Naming things</p>
+</blockquote>
+### <br><br><b>Shannon Pileggi</b>
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+  PCCTC: Strategies for naming things
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+
+
+
+
+
+
+
+class: middle, inverse
+
+## What are we going to cover?
+
+.hand[Three principles to be kind to yourself]
+
+- General strategy
+- Make sorting easy
+- Be nice to machines
+- Be nice to humans
+
+
+---
+
+class: middle, inverse
+
+
+.hand[Acknowledgment]
+
+- Modified from Slides by Danielle Navarro
+- https://slides.djnavarro.net/project-structure/#1
+
+.hand[Danielle also said]
+
+- "Everything I know is from Jenny Bryan"
+- This section is based on (i.e., shamelessly mimics) her slides
+- https://speakerdeck.com/jennybc/how-to-name-files
+
+
+---
+
+class: middle
+
+.hand[
+’Tis but thy name that is my enemy;&lt;br&gt;
+Thou art thyself, though not a Montague.&lt;br&gt;
+What’s Montague? It is nor hand, nor foot,&lt;br&gt;
+Nor arm, nor face, nor any other part&lt;br&gt;
+Belonging to a man. O, be some other name!&lt;br&gt;
+What’s in a name? That which we call a rose&lt;br&gt;
+By any other name would smell as sweet;&lt;br&gt;
+So Romeo would, were he not Romeo call’d,&lt;br&gt;
+Retain that dear perfection which he owes&lt;br&gt;
+Without that title. Romeo, doff thy name;&lt;br&gt;
+And for thy name, which is no part of thee,&lt;br&gt;
+Take all myself.
+]
+
+---
+
+class: middle, inverse
+
+.hand[This isn't true for file names!]
+
+---
+
+.hand[Some file names are good ✅]
+
+- `reading01_shakespeare_romeo-and-juliet_act01.docx`
+- `reading01_shakespeare_romeo-and-juliet_act02.docx`
+- `reading01_shakespeare_romeo-and-juliet_act03.docx`
+- `reading02_shakespeare_othello.docx`
+- `reading19_plath_the-bell-jar.docx`
+
+--
+
+.hand[Other file names are baaaaaad ❌]
+
+- `Romeo and Juliet Act 1.docx`
+- `Romeo and juliet act 2.docx`
+- `Shakespeare RJ act3.docx`
+- `shakespeare othello I think?.docx`
+- `belljar plath (1).docx`
+
+---
+
+class: middle, inverse
+
+background-image: url("img/free-to-use-sounds-xbHgspX4_nc-unsplash.jpg")
+background-size: cover
+
+.pull-left-narrow[
+  .huge-primary[.plainwhite[1]]
+]
+.pull-right-wide[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.larger[.embolden[.plainwhite[General strategy]]]
+]
+
+---
+
+class: inverse
+
+.hand[Strategy]
+
+
+```r
+[sorting prefix]_[stem]_[description].[ext]
+```
+
+---
+
+class: inverse
+
+.hand[Sorting prefix ↕️]
+
+
+```r
+[sorting prefix]_[stem]_[description].[ext]
+```
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;&lt;span style='background-color:#ffff7f'&gt;"2021-01-01&lt;/span&gt;_ironman-reconciliation_biospecimen.xlsx"&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;"2021-01-01&lt;/span&gt;_ironman-reconciliation_last-visit.xlsx"&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;"2022-03-15&lt;/span&gt;_dora_medical-monitoring.pdf"&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;"2021-11-05&lt;/span&gt;_dora_idmc.pdf"&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;"2021-11-05&lt;/span&gt;_dora_idmc_Amanda-notes.pdf"&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;"01&lt;/span&gt;_reconcilation_prepare-data.R"&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;"02&lt;/span&gt;_reconcilation_create-tables.R"&lt;/code&gt;
+
+When anticipating multiple versions or components of a file, use a sorting prefix like 
+dates or numbers.
+
+---
+
+
+class: inverse
+
+.hand[stem 🌱]
+
+
+```r
+[sorting prefix]_[stem]_[description].[ext]
+```
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;"2021-01-01&lt;span style='background-color:#ffff7f'&gt;_ironman-reconciliation_&lt;/span&gt;biospecimen.xlsx"&lt;br&gt;"2021-01-01&lt;span style='background-color:#ffff7f'&gt;_ironman-reconciliation_&lt;/span&gt;last-visit.xlsx"&lt;br&gt;"2022-03-15&lt;span style='background-color:#ffff7f'&gt;_dora_&lt;/span&gt;medical-monitoring.pdf"&lt;br&gt;"2021-11-05&lt;span style='background-color:#ffff7f'&gt;_dora_&lt;/span&gt;idmc.pdf"&lt;br&gt;"2021-11-05&lt;span style='background-color:#ffff7f'&gt;_dora_idmc_&lt;/span&gt;Amanda-notes.pdf"&lt;br&gt;"01&lt;span style='background-color:#ffff7f'&gt;_reconcilation_&lt;/span&gt;prepare-data.R"&lt;br&gt;"02&lt;span style='background-color:#ffff7f'&gt;_reconcilation_&lt;/span&gt;create-tables.R"&lt;/code&gt;
+
+A stem is a core, unchanging component of you file name.
+
+
+---
+
+class: inverse
+
+.hand[Description 💅]
+
+
+```r
+[sorting prefix]_[stem]_[description].[ext]
+```
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;"2021-01-01_ironman-reconciliation_biospecimen.xlsx"&lt;br&gt;"2021-01-01_ironman-reconciliation_last-visit.xlsx"&lt;br&gt;"2022-03-15_dora_medical-monitoring.pdf"&lt;br&gt;"2021-11-05_dora_idmc.pdf"&lt;br&gt;"2021-11-05_dora_idmc_Amanda-notes.pdf"&lt;br&gt;"01_reconcilation_prepare-data.R"&lt;br&gt;"02_reconcilation&lt;span style='background-color:#ffff7f'&gt;_create-tables.R"&lt;/span&gt;&lt;/code&gt;
+
+A description describes or modifies the stem.
+
+
+---
+
+class: middle, inverse
+
+background-image: url("img/free-to-use-sounds-xbHgspX4_nc-unsplash.jpg")
+background-size: cover
+
+.pull-left-narrow[
+  .huge-primary[.plainwhite[2]]
+]
+.pull-right-wide[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.larger[.embolden[.plainwhite[Make sorting easy]]]
+]
+
+
+---
+
+
+.hand[File names sometimes need to include dates&lt;br&gt;... but these dates don't sort in chronological order 😭]
+
+- `1-April-2012.R`
+- `1-Jan-2009.R`
+- `1-Jan-2012.R`
+- `12-Jan-2012.R`
+- `2-Jan-2012.R`
+- `31-Dec-2009.R`
+
+---
+
+.hand[Happily, these dates do! 🎉]
+
+- `2009-01-01.R`
+- `2009-12-01.R`
+- `2012-01-01.R`
+- `2012-01-02.R`
+- `2012-04-01.R`
+
+
+--
+
+
+.hand[Key principle with dates...]
+
+- Dates should follow the `YYYY-MM-DD` format
+- Known as the ISO 8601 standard
+
+
+---
+
+class: inverse
+
+.hand[Place dates before slugs to preserve chronology...]
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;&lt;span style='background-color:#ffff7f'&gt;"2009-01-01&lt;/span&gt;_original-analysis.R"&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;"2009-12-01&lt;/span&gt;_minor-changes-to-original.R"&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;"2012-01-01&lt;/span&gt;_analysis-at-2-year-follow-up.R"&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;"2012-01-02&lt;/span&gt;_minor-changes-to-follow-up.R"&lt;br&gt;&lt;span style='background-color:#ffff7f'&gt;"2012-04-01&lt;/span&gt;_combined-original-and-follow-up.R"&lt;/code&gt;
+
+
+---
+
+class: inverse
+
+.hand[... and the slugs will tell a story!]
+
+
+
+&lt;code class ='r hljs remark-code'&gt;"2009-01-01&lt;span style='background-color:#ffff7f'&gt;_original-analysis&lt;/span&gt;.R"&lt;br&gt;"2009-12-01&lt;span style='background-color:#ffff7f'&gt;_minor-changes-to-original&lt;/span&gt;.R"&lt;br&gt;"2012-01-01&lt;span style='background-color:#ffff7f'&gt;_analysis-at-2-year-follow-up&lt;/span&gt;.R"&lt;br&gt;"2012-01-02&lt;span style='background-color:#ffff7f'&gt;_minor-changes-to-follow-up&lt;/span&gt;.R"&lt;br&gt;"2012-04-01&lt;span style='background-color:#ffff7f'&gt;_combined-original-and-follow-up&lt;/span&gt;.R"&lt;/code&gt;
+
+
+---
+
+
+.hand[Use numbers as a prefix to order files]
+
+- `01_preface.docx`
+- `02_introduction.docx`
+- `03_method.docx`
+- etc...
+
+
+- `19_appendix-09.docx`
+- `20_appendix-10.docx`
+- `21_appendix-11.docx`
+
+
+--
+
+
+- Left pad with `0` so that all numbers have same length
+- Numbers are more robust than letters (alphabetical order varies)
+
+
+---
+
+.hand[Include keywords...]
+
+- `reading01_shakespeare_romeo-and-juliet_act01.docx`
+- `reading01_shakespeare_romeo-and-juliet_act02.docx`
+- `reading01_shakespeare_romeo-and-juliet_act03.docx`
+- `reading02_shakespeare_othello.docx`
+- `reading19_plath_the-bell-jar.docx`
+- `notes02_shakespeare_othello.docx`
+- `notes19_plath_the-bell-jar.docx`
+
+
+--
+
+.hand[... to let computer find files]
+
+- &lt;code&gt;reading19_&lt;b&gt;plath&lt;/b&gt;_the-bell-jar.docx&lt;/code&gt;
+- &lt;code&gt;notes19_&lt;b&gt;plath&lt;/b&gt;_the-bell-jar.docx&lt;/code&gt;
+
+
+---
+
+.hand[Include keywords...]
+
+- `reading01_shakespeare_romeo-and-juliet_act01.docx`
+- `reading01_shakespeare_romeo-and-juliet_act02.docx`
+- `reading01_shakespeare_romeo-and-juliet_act03.docx`
+- `reading02_shakespeare_othello.docx`
+- `reading19_plath_the-bell-jar.docx`
+- `notes02_shakespeare_othello.docx`
+- `notes19_plath_the-bell-jar.docx`
+
+
+.hand[... to let computer find files]
+
+- &lt;code&gt;&lt;b&gt;notes&lt;/b&gt;02_shakespeare_othello.docx&lt;/code&gt;
+- &lt;code&gt;&lt;b&gt;notes&lt;/b&gt;19_plath_the-bell-jar.docx&lt;/code&gt;
+
+
+
+
+---
+
+class: middle, inverse
+
+background-image: url("img/free-to-use-sounds-xbHgspX4_nc-unsplash.jpg")
+background-size: cover
+
+.pull-left-narrow[
+  .huge-primary[.plainwhite[3]]
+]
+.pull-right-wide[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.larger[.embolden[.plainwhite[Be nice to machines]]]
+]
+
+---
+
+.hand[Don't leave white space]
+
+- Machines sometimes get confused by spaces
+- Easier to write code when files don't have spaces
+
+
+--
+
+
+- ✅ `romeo-and-juliet_act01.docx`
+- ✅ `midsummer-nights-dream.docx`
+
+
+- ❌ `romeo and juliet act 1.docx`
+- ❌ `midsummer nights dream.docx`
+
+
+
+---
+
+
+
+.hand[Use letters, numbers, hyphens and underscores... that's it]
+
+- Machines sometimes get confused by special characters
+- Some characters have special meaning, e.g., `^.*?+|$`
+- If you can, avoid accents `ñ` (but consider accessibility!)
+
+
+--
+
+
+- ✅ `what-the-cat.docx`
+- ✅ `essay_romeo-and-juliet_draft01.docx`
+
+
+- ❌ `what-the-cat?.docx`
+- ❌ `essay "romeo and juliet" draft01.docx`
+- ❌ `essay "romeo and juliet" draft01(1).docx`
+
+
+
+
+---
+
+.hand[Don't assume case is meaningful]
+
+- Some operating systems treat `a` and `A` the same
+- Some operating systems treat `a` and `A` differently
+- Never have two files that differ only in case
+- Be consistent
+
+
+--
+
+
+- ✅ `othello.docx`
+- ✅ `romeo-and-juliet.docx`
+
+
+- ❌ `othello.docx`
+- ❌ `Othello.docx`
+- ❌ `Romeo-and-juliet.docx`
+
+
+
+
+---
+
+.hand[Use separator characters wisely]
+
+- Use hyphen `-` to mean "different words that are part of the same chunk"
+- Use underscore `_` to separate different chunks
+
+--
+
+
+- Chunk: [identifier] `reading01`, `reading02`, etc
+- Chunk: [author] `shakespeare`, `plath`, etc
+- Chunk: [title] `othello`, `the-bell-jar`, etc
+- Chunk: [section] `act01`, `act02`, etc
+
+
+--
+
+
+- Order: [identifier] [author] [title] [section(optional)]
+- ✅ `reading01_shakespeare_romeo-and-juliet_act01.docx`
+- ✅ `reading01_shakespeare_romeo-and-juliet_act02.docx`
+- ✅ `reading02_shakespeare_othello.docx`
+- ✅ `reading19_plath_the-bell-jar.docx`
+
+
+
+
+---
+
+class: middle, inverse
+
+background-image: url("img/free-to-use-sounds-xbHgspX4_nc-unsplash.jpg")
+background-size: cover
+
+.pull-left-narrow[
+  .huge-primary[.plainwhite[4]]
+]
+.pull-right-wide[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.larger[.embolden[.plainwhite[Be nice to humans]]]
+]
+
+
+
+
+---
+
+
+.hand[It's 3am and the project is due... do you want these files?]
+
+- `01.R`
+- `02.R`
+- `notes.txt`
+- `2b.R`
+- `notes.docx`
+
+--
+
+.hand[or these?]
+
+- `analysis01_descriptive-statistics.R`
+- `analysis02_preregistered-analysis.R`
+- `notes01_realising-the-problem.txt`
+- `analysis03_departing-from-the-plan.R`
+- `notes02_tentative-write-up.docx`
+
+
+
+---
+
+class: inverse
+
+.hand[Love the stem 🐌]
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;"analysis01&lt;span style='background-color:#ffff7f'&gt;_descriptive-statistics&lt;/span&gt;.R"&lt;br&gt;"analysis02&lt;span style='background-color:#ffff7f'&gt;_preregistered-analysis&lt;/span&gt;.R"&lt;br&gt;"notes01&lt;span style='background-color:#ffff7f'&gt;_realising-the-problem&lt;/span&gt;.txt"&lt;br&gt;"analysis03&lt;span style='background-color:#ffff7f'&gt;_departing-from-the-plan&lt;/span&gt;.R"&lt;br&gt;"notes02&lt;span style='background-color:#ffff7f'&gt;_tentative-write-up&lt;/span&gt;.docx"&lt;/code&gt;
+
+
+--
+
+
+- Concise, meaningful description
+- Usually appended to the end
+
+
+
+---
+
+class: middle, inverse
+
+background-image: url("img/jessica-lee-o5GGlwHfff8-unsplash.jpg")
+background-size: cover
+
+.hand-primary[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;... and we're done! explore and be organised! ❤️]
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "solarized-light",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>`"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

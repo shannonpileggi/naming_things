@@ -1,0 +1,598 @@
+---
+title: "> &nbsp;&nbsp; `r emo::ji('building_construction')` <br>> &nbsp;&nbsp; Naming things"
+subtitle: ""
+author: "<br><br><b>Shannon Pileggi</b>"
+date: ""
+output:
+  xaringan::moon_reader:
+    includes:
+    lib_dir: libs
+    css: ["style/xaringan-themer.css", "style/slides-style.css"]
+    nature:
+      highlightStyle: solarized-light
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>`
+---
+
+```{r child = "style/setup.Rmd"}
+```
+
+```{r load-packages, message=FALSE, echo=FALSE, warning=FALSE}
+library(tidyverse)
+library(flair)
+library(metathis)
+```
+
+
+```{r meta, echo=FALSE}
+meta() %>%
+  meta_general(
+    description = "Project structure",
+  ) %>% 
+  meta_name("github-repo" = "djnavarro/slides") %>% 
+  meta_social(
+    title = "Project structure",
+    url = "https://slides.djnavarro.net/project-structure/",
+    image = "https://slides.djnavarro.net/project-structure/img/twitter-image.png",
+    image_alt = "",
+    og_type = "website",
+    og_author = "Danielle Navarro",
+    twitter_card_type = "summary_large_image",
+    twitter_creator = "@djnavarro"
+  )
+```
+
+
+```{r include=FALSE}
+hook_source <- knitr::knit_hooks$get('source')
+knitr::knit_hooks$set(source = function(x, options) {
+  x <- stringr::str_replace(x, "^[[:blank:]]?([^*].+?)[[:blank:]]*#<<[[:blank:]]*$", "*\\1")
+  hook_source(x, options)
+})
+
+num_fmt <- scales::number_format(big.mark = ",")
+sec_num <- 0
+section <- function() {
+  sec_num <<- sec_num + 1
+  sec_num
+}
+```
+
+
+class: middle, inverse
+
+## What are we going to cover?
+
+.hand[Three principles to be kind to yourself]
+
+- General strategy
+- Make sorting easy
+- Be nice to machines
+- Be nice to humans
+
+
+---
+
+class: middle, inverse
+
+
+.hand[Acknowledgment]
+
+- Modified from Slides by Danielle Navarro
+- https://slides.djnavarro.net/project-structure/#1
+
+.hand[Danielle also said]
+
+- "Everything I know is from Jenny Bryan"
+- This section is based on (i.e., shamelessly mimics) her slides
+- https://speakerdeck.com/jennybc/how-to-name-files
+
+
+---
+
+class: middle
+
+.hand[
+’Tis but thy name that is my enemy;<br>
+Thou art thyself, though not a Montague.<br>
+What’s Montague? It is nor hand, nor foot,<br>
+Nor arm, nor face, nor any other part<br>
+Belonging to a man. O, be some other name!<br>
+What’s in a name? That which we call a rose<br>
+By any other name would smell as sweet;<br>
+So Romeo would, were he not Romeo call’d,<br>
+Retain that dear perfection which he owes<br>
+Without that title. Romeo, doff thy name;<br>
+And for thy name, which is no part of thee,<br>
+Take all myself.
+]
+
+---
+
+class: middle, inverse
+
+.hand[This isn't true for file names!]
+
+---
+
+.hand[Some file names are good `r emo::ji("check")`]
+
+- `reading01_shakespeare_romeo-and-juliet_act01.docx`
+- `reading01_shakespeare_romeo-and-juliet_act02.docx`
+- `reading01_shakespeare_romeo-and-juliet_act03.docx`
+- `reading02_shakespeare_othello.docx`
+- `reading19_plath_the-bell-jar.docx`
+
+--
+
+.hand[Other file names are baaaaaad `r emo::ji("x")`]
+
+- `Romeo and Juliet Act 1.docx`
+- `Romeo and juliet act 2.docx`
+- `Shakespeare RJ act3.docx`
+- `shakespeare othello I think?.docx`
+- `belljar plath (1).docx`
+
+---
+
+class: middle, inverse
+
+background-image: url("img/free-to-use-sounds-xbHgspX4_nc-unsplash.jpg")
+background-size: cover
+
+.pull-left-narrow[
+  .huge-primary[.plainwhite[`r section()`]]
+]
+.pull-right-wide[
+<br><br><br>
+.larger[.embolden[.plainwhite[General strategy]]]
+]
+
+---
+
+class: inverse
+
+.hand[Strategy]
+
+```{r strategy, eval=FALSE}
+[sorting prefix]_[stem]_[description].[ext]
+```
+
+---
+
+class: inverse
+
+.hand[Sorting prefix ↕️]
+
+```{r, eval=FALSE}
+[sorting prefix]_[stem]_[description].[ext]
+```
+
+```{r filenames-prefix, include=FALSE, results='hide'}
+"2021-01-01_ironman-reconciliation_biospecimen.xlsx"
+"2021-01-01_ironman-reconciliation_last-visit.xlsx"
+"2022-03-15_dora_medical-monitoring.pdf"
+"2021-11-05_dora_idmc.pdf"
+"2021-11-05_dora_idmc_Amanda-notes.pdf"
+"01_reconcilation_prepare-data.R"
+"02_reconcilation_create-tables.R"
+```
+
+```{r, echo=FALSE, results='asis'}
+decorate_chunk("filenames-prefix") %>% 
+  flair_rx('"[^_\n]+') %>% 
+  flair::knit_print.with_flair()
+```
+
+When anticipating multiple versions or components of a file, use a sorting prefix like 
+dates or numbers.
+
+---
+
+
+class: inverse
+
+.hand[stem `r emo::ji("seedling")`]
+
+```{r, eval=FALSE}
+[sorting prefix]_[stem]_[description].[ext]
+```
+
+```{r filenames-stem, include=FALSE, results='hide'}
+"2021-01-01_ironman-reconciliation_biospecimen.xlsx"
+"2021-01-01_ironman-reconciliation_last-visit.xlsx"
+"2022-03-15_dora_medical-monitoring.pdf"
+"2021-11-05_dora_idmc.pdf"
+"2021-11-05_dora_idmc_Amanda-notes.pdf"
+"01_reconcilation_prepare-data.R"
+"02_reconcilation_create-tables.R"
+```
+
+```{r, echo=FALSE, results='asis'}
+decorate_chunk("filenames-stem") %>% 
+  flair_rx("_.*_") %>%
+  #flair_rx("_[^.]*") %>%
+  #flair_rx("_[.*]_") %>% 
+  #flair("_ironman-reconciliation_") %>% 
+  #flair("_dora_") %>% 
+  #flair("_reconcilation_") %>% 
+  flair::knit_print.with_flair()
+```
+
+A stem is a core, unchanging component of you file name.
+
+
+---
+
+class: inverse
+
+.hand[Description `r emo::ji("polish")`]
+
+```{r, eval=FALSE}
+[sorting prefix]_[stem]_[description].[ext]
+```
+
+```{r filenames-description, include=FALSE, results='hide'}
+"2021-01-01_ironman-reconciliation_biospecimen.xlsx"
+"2021-01-01_ironman-reconciliation_last-visit.xlsx"
+"2022-03-15_dora_medical-monitoring.pdf"
+"2021-11-05_dora_idmc.pdf"
+"2021-11-05_dora_idmc_Amanda-notes.pdf"
+"01_reconcilation_prepare-data.R"
+"02_reconcilation_create-tables.R"
+```
+
+```{r, echo=FALSE, results='asis'}
+decorate_chunk("filenames-description") %>% 
+  flair_rx("_[^_]+$") %>% 
+  flair::knit_print.with_flair()
+```
+
+A description describes or modifies the stem.
+
+
+---
+
+class: middle, inverse
+
+background-image: url("img/free-to-use-sounds-xbHgspX4_nc-unsplash.jpg")
+background-size: cover
+
+.pull-left-narrow[
+  .huge-primary[.plainwhite[`r section()`]]
+]
+.pull-right-wide[
+<br><br><br>
+.larger[.embolden[.plainwhite[Make sorting easy]]]
+]
+
+
+---
+
+
+.hand[File names sometimes need to include dates<br>... but these dates don't sort in chronological order `r emo::ji("sob")`]
+
+- `1-April-2012.R`
+- `1-Jan-2009.R`
+- `1-Jan-2012.R`
+- `12-Jan-2012.R`
+- `2-Jan-2012.R`
+- `31-Dec-2009.R`
+
+---
+
+.hand[Happily, these dates do! `r emo::ji("tada")`]
+
+- `2009-01-01.R`
+- `2009-12-01.R`
+- `2012-01-01.R`
+- `2012-01-02.R`
+- `2012-04-01.R`
+
+
+--
+
+
+.hand[Key principle with dates...]
+
+- Dates should follow the `YYYY-MM-DD` format
+- Known as the ISO 8601 standard
+
+
+---
+
+class: inverse
+
+.hand[Place dates before slugs to preserve chronology...]
+
+```{r filenames2, include=FALSE, results='hide'}
+"2009-01-01_original-analysis.R"
+"2009-12-01_minor-changes-to-original.R"
+"2012-01-01_analysis-at-2-year-follow-up.R"
+"2012-01-02_minor-changes-to-follow-up.R"
+"2012-04-01_combined-original-and-follow-up.R"
+```
+
+```{r, echo=FALSE, results='asis'}
+decorate_chunk("filenames2") %>% 
+  flair_rx('"[^_\n]+') %>% 
+  flair::knit_print.with_flair()
+```
+
+
+---
+
+class: inverse
+
+.hand[... and the slugs will tell a story!]
+
+
+```{r, echo=FALSE, results='asis'}
+decorate_chunk("filenames2") %>% 
+  flair_rx("_[^.]*") %>% 
+  flair::knit_print.with_flair()
+```
+
+
+---
+
+
+.hand[Use numbers as a prefix to order files]
+
+- `01_preface.docx`
+- `02_introduction.docx`
+- `03_method.docx`
+- etc...
+
+
+- `19_appendix-09.docx`
+- `20_appendix-10.docx`
+- `21_appendix-11.docx`
+
+
+--
+
+
+- Left pad with `0` so that all numbers have same length
+- Numbers are more robust than letters (alphabetical order varies)
+
+
+---
+
+.hand[Include keywords...]
+
+- `reading01_shakespeare_romeo-and-juliet_act01.docx`
+- `reading01_shakespeare_romeo-and-juliet_act02.docx`
+- `reading01_shakespeare_romeo-and-juliet_act03.docx`
+- `reading02_shakespeare_othello.docx`
+- `reading19_plath_the-bell-jar.docx`
+- `notes02_shakespeare_othello.docx`
+- `notes19_plath_the-bell-jar.docx`
+
+
+--
+
+.hand[... to let computer find files]
+
+- <code>reading19_<b>plath</b>_the-bell-jar.docx</code>
+- <code>notes19_<b>plath</b>_the-bell-jar.docx</code>
+
+
+---
+
+.hand[Include keywords...]
+
+- `reading01_shakespeare_romeo-and-juliet_act01.docx`
+- `reading01_shakespeare_romeo-and-juliet_act02.docx`
+- `reading01_shakespeare_romeo-and-juliet_act03.docx`
+- `reading02_shakespeare_othello.docx`
+- `reading19_plath_the-bell-jar.docx`
+- `notes02_shakespeare_othello.docx`
+- `notes19_plath_the-bell-jar.docx`
+
+
+.hand[... to let computer find files]
+
+- <code><b>notes</b>02_shakespeare_othello.docx</code>
+- <code><b>notes</b>19_plath_the-bell-jar.docx</code>
+
+
+
+
+---
+
+class: middle, inverse
+
+background-image: url("img/free-to-use-sounds-xbHgspX4_nc-unsplash.jpg")
+background-size: cover
+
+.pull-left-narrow[
+  .huge-primary[.plainwhite[`r section()`]]
+]
+.pull-right-wide[
+<br><br><br>
+.larger[.embolden[.plainwhite[Be nice to machines]]]
+]
+
+---
+
+.hand[Don't leave white space]
+
+- Machines sometimes get confused by spaces
+- Easier to write code when files don't have spaces
+
+
+--
+
+
+- `r emo::ji("check")` `romeo-and-juliet_act01.docx`
+- `r emo::ji("check")` `midsummer-nights-dream.docx`
+
+
+- `r emo::ji("x")` `romeo and juliet act 1.docx`
+- `r emo::ji("x")` `midsummer nights dream.docx`
+
+
+
+---
+
+
+
+.hand[Use letters, numbers, hyphens and underscores... that's it]
+
+- Machines sometimes get confused by special characters
+- Some characters have special meaning, e.g., `^.*?+|$`
+- If you can, avoid accents `ñ` (but consider accessibility!)
+
+
+--
+
+
+- `r emo::ji("check")` `what-the-cat.docx`
+- `r emo::ji("check")` `essay_romeo-and-juliet_draft01.docx`
+
+
+- `r emo::ji("x")` `what-the-cat?.docx`
+- `r emo::ji("x")` `essay "romeo and juliet" draft01.docx`
+- `r emo::ji("x")` `essay "romeo and juliet" draft01(1).docx`
+
+
+
+
+---
+
+.hand[Don't assume case is meaningful]
+
+- Some operating systems treat `a` and `A` the same
+- Some operating systems treat `a` and `A` differently
+- Never have two files that differ only in case
+- Be consistent
+
+
+--
+
+
+- `r emo::ji("check")` `othello.docx`
+- `r emo::ji("check")` `romeo-and-juliet.docx`
+
+
+- `r emo::ji("x")` `othello.docx`
+- `r emo::ji("x")` `Othello.docx`
+- `r emo::ji("x")` `Romeo-and-juliet.docx`
+
+
+
+
+---
+
+.hand[Use separator characters wisely]
+
+- Use hyphen `-` to mean "different words that are part of the same chunk"
+- Use underscore `_` to separate different chunks
+
+--
+
+
+- Chunk: [identifier] `reading01`, `reading02`, etc
+- Chunk: [author] `shakespeare`, `plath`, etc
+- Chunk: [title] `othello`, `the-bell-jar`, etc
+- Chunk: [section] `act01`, `act02`, etc
+
+
+--
+
+
+- Order: [identifier] [author] [title] [section(optional)]
+- `r emo::ji("check")` `reading01_shakespeare_romeo-and-juliet_act01.docx`
+- `r emo::ji("check")` `reading01_shakespeare_romeo-and-juliet_act02.docx`
+- `r emo::ji("check")` `reading02_shakespeare_othello.docx`
+- `r emo::ji("check")` `reading19_plath_the-bell-jar.docx`
+
+
+
+
+---
+
+class: middle, inverse
+
+background-image: url("img/free-to-use-sounds-xbHgspX4_nc-unsplash.jpg")
+background-size: cover
+
+.pull-left-narrow[
+  .huge-primary[.plainwhite[`r section()`]]
+]
+.pull-right-wide[
+<br><br><br>
+.larger[.embolden[.plainwhite[Be nice to humans]]]
+]
+
+
+
+
+---
+
+
+.hand[It's 3am and the project is due... do you want these files?]
+
+- `01.R`
+- `02.R`
+- `notes.txt`
+- `2b.R`
+- `notes.docx`
+
+--
+
+.hand[or these?]
+
+- `analysis01_descriptive-statistics.R`
+- `analysis02_preregistered-analysis.R`
+- `notes01_realising-the-problem.txt`
+- `analysis03_departing-from-the-plan.R`
+- `notes02_tentative-write-up.docx`
+
+
+
+---
+
+class: inverse
+
+.hand[Love the stem `r emo::ji("snail")`]
+
+```{r filenames, include=FALSE, results='hide'}
+"analysis01_descriptive-statistics.R"
+"analysis02_preregistered-analysis.R"
+"notes01_realising-the-problem.txt"
+"analysis03_departing-from-the-plan.R"
+"notes02_tentative-write-up.docx"
+```
+
+```{r, echo=FALSE, results='asis'}
+decorate_chunk("filenames") %>% 
+  flair_rx("_[^.]*") %>% 
+  flair::knit_print.with_flair()
+```
+
+
+--
+
+
+- Concise, meaningful description
+- Usually appended to the end
+
+
+
+---
+
+class: middle, inverse
+
+background-image: url("img/jessica-lee-o5GGlwHfff8-unsplash.jpg")
+background-size: cover
+
+.hand-primary[<br><br><br><br>... and we're done! explore and be organised! `r emo::ji("heart")`]
+
